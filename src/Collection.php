@@ -65,7 +65,7 @@ class Collection extends AbstractCollection
      *
      * @return $this
      */
-    public function setRegisterHandler(
+    public function setMainHandler(
         string $handler,
         bool $lazy = true
     ) : self {

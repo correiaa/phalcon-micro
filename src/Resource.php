@@ -3,6 +3,7 @@
 namespace Nilnice\Phalcon;
 
 use Nilnice\Phalcon\Constant\Service;
+use Nilnice\Phalcon\Controller\ResourceController;
 use Phalcon\Di;
 
 class Resource extends AbstractCollection
@@ -60,6 +61,15 @@ class Resource extends AbstractCollection
         if (! $resource->getItemKey()) {
             $resource->setItemKey('items');
         }
+
+        if (! $resource->getCollectionKey()) {
+            $resource->setCollectionKey('items');
+        }
+
+        if (! $resource->getHandler()) {
+            $resource->setHandler(ResourceController::class);
+        }
+
 
         if ($name !== null && ! $resource->getName()) {
             $resource->setName($name);
