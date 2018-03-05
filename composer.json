@@ -1,6 +1,7 @@
 {
-  "name": "nilnice/phalcon-rest",
+  "name": "nilnice/phalcon-micro",
   "description": "this is phalcon RESTFul API for Phalcon.",
+  "type": "library",
   "keywords": [
     "phalcon",
     "phalcon-micro"
