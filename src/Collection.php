@@ -7,6 +7,11 @@ use Nilnice\Phalcon\Support\Arr;
 class Collection extends AbstractCollection
 {
     /**
+     * @var string
+     */
+    protected $collectionKey;
+
+    /**
      * @var array
      */
     protected $allowRoles = [];
@@ -70,6 +75,30 @@ class Collection extends AbstractCollection
     }
 
     /**
+     * Set collection key.
+     *
+     * @param string $collectionKey
+     *
+     * @return \Nilnice\Phalcon\Collection
+     */
+    public function setCollectionKey(string $collectionKey) : self
+    {
+        $this->collectionKey = $collectionKey;
+
+        return $this;
+    }
+
+    /**
+     * Get collection key.
+     *
+     * @return string
+     */
+    public function getCollectionKey() : string
+    {
+        return $this->collectionKey ?: $this->name ?: 'item';
+    }
+
+    /**
      * Allows access to this endpoint for role with the given names.
      *
      * @param ...array $roles
@@ -122,6 +151,4 @@ class Collection extends AbstractCollection
     {
         return $this->denyRoles;
     }
-
-
 }
