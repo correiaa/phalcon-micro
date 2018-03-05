@@ -117,7 +117,7 @@ abstract class AbstractCollection extends Collection
      *
      * @return array
      */
-    public function getAllEndpoint() : array
+    public function getEndpoints() : array
     {
         return array_values($this->endpoints);
     }

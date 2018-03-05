@@ -14,9 +14,26 @@ use Phalcon\Mvc\Micro\MiddlewareInterface;
 class Api extends Micro
 {
     /**
-     * @param $middleware
+     * @var array
+     */
+    protected $collectionByName = [];
+
+    /**
+     * @var array
+     */
+    protected $collectionByIdentifier = [];
+
+    /**
+     * @var array
+     */
+    protected $endpointByIdentifier = [];
+
+    /**
+     * Attach middleware.
      *
-     * @return $this
+     * @param \Phalcon\Mvc\Micro\MiddlewareInterface $middleware
+     *
+     * @return \Nilnice\Phalcon\Api
      */
     public function attach(MiddlewareInterface $middleware) : self
     {
@@ -30,8 +47,75 @@ class Api extends Micro
         return $this;
     }
 
-    public function mount(CollectionInterface $collection)
+    /**
+     * Set collection.
+     *
+     * @param \Nilnice\Phalcon\Collection $collection
+     *
+     * @return \Nilnice\Phalcon\Api
+     */
+    public function setCollection(Collection $collection) : self
     {
+        $this->mount($collection);
+
+        return $this;
+    }
+
+    public function getCollection()
+    {
+        return $this->collectionByName ?? null;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCollections() : array
+    {
+        return array_values($this->collectionByIdentifier);
+    }
+
+    /**
+     * Set resource.
+     *
+     * @param Resource $resource
+     *
+     * @return \Nilnice\Phalcon\Api
+     */
+    public function setResource(Resource $resource) : self
+    {
+        $this->mount($resource);
+
+        return $this;
+    }
+
+
+    /**
+     * Mounts a collection of handlers.
+     *
+     * @param \Phalcon\Mvc\Micro\CollectionInterface $collection
+     *
+     * @return \Phalcon\Mvc\Micro
+     */
+    public function mount(CollectionInterface $collection) : Micro
+    {
+        if ($collection instanceof Collection) {
+            $name = $collection->getName();
+            $identifier = $collection->getPrefix();
+
+            if ($name !== null) {
+                $this->collectionByName[$name] = $collection;
+            }
+            $this->collectionByIdentifier[$identifier] = $collection;
+
+            /** @var \Nilnice\Phalcon\Endpoint $endpoint */
+            foreach ($collection->getEndpoints() as $endpoint) {
+                $identifier = $collection->getIdentifier() . ' '
+                    . $endpoint->getIdentifier();
+
+                $this->endpointByIdentifier[$identifier] = $endpoint;
+            }
+        }
+
         return parent::mount($collection);
     }
 }
