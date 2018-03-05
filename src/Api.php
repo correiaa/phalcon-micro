@@ -61,12 +61,21 @@ class Api extends Micro
         return $this;
     }
 
-    public function getCollection()
+    /**
+     * Get collection by name.
+     *
+     * @param string $name
+     *
+     * @return mixed|null
+     */
+    public function getCollection(string $name)
     {
-        return $this->collectionByName ?? null;
+        return $this->collectionByName[$name] ?? null;
     }
 
     /**
+     * Get all collections.
+     *
      * @return array
      */
     public function getCollections() : array
