@@ -6,7 +6,7 @@ use Nilnice\Phalcon\Constant\Service;
 use Nilnice\Phalcon\Controller\ResourceController;
 use Phalcon\Di;
 
-class Resource extends AbstractCollection
+class Resource extends \Phalcon\Mvc\Micro\Collection
 {
     use CollectionTrait;
 
@@ -31,7 +31,7 @@ class Resource extends AbstractCollection
      * @param string      $prefix
      * @param string|null $name
      *
-     * @return $this|\Nilnice\Phalcon\AbstractCollection
+     * @return \Phalcon\Mvc\Micro\Collection
      */
     public static function setCurd(string $prefix, string $name = null)
     {

@@ -4,7 +4,7 @@ namespace Nilnice\Phalcon;
 
 use Nilnice\Phalcon\Support\Arr;
 
-class Collection extends AbstractCollection
+class Collection extends \Phalcon\Mvc\Micro\Collection
 {
     use CollectionTrait;
 
