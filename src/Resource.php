@@ -26,6 +26,16 @@ class Resource extends \Phalcon\Mvc\Micro\Collection
     protected $modelPrimaryKey;
 
     /**
+     * Resource constructor.
+     */
+    public function __construct()
+    {
+        if (method_exists($this, 'initialize')) {
+            $this->initialize();
+        }
+    }
+
+    /**
      * Set curd.
      *
      * @param string      $prefix
@@ -33,8 +43,10 @@ class Resource extends \Phalcon\Mvc\Micro\Collection
      *
      * @return \Phalcon\Mvc\Micro\Collection
      */
-    public static function setCurd(string $prefix, string $name = null)
-    {
+    public static function setCurd(
+        string $prefix,
+        string $name = null
+    ) : \Phalcon\Mvc\Micro\Collection {
         /** @var \Nilnice\Phalcon\Resource $resource */
         $resource = self::factory($prefix, $name);
 

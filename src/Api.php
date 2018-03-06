@@ -4,6 +4,7 @@ namespace Nilnice\Phalcon;
 
 use Nilnice\Phalcon\Constant\Service;
 use Phalcon\Mvc\Micro;
+use Phalcon\Mvc\Micro\Collection;
 use Phalcon\Mvc\Micro\CollectionInterface;
 use Phalcon\Mvc\Micro\MiddlewareInterface;
 
@@ -50,11 +51,11 @@ class Api extends Micro
     /**
      * Set collection.
      *
-     * @param \Nilnice\Phalcon\Collection $collection
+     * @param \Phalcon\Mvc\Micro\CollectionInterface $collection
      *
      * @return \Nilnice\Phalcon\Api
      */
-    public function setCollection(Collection $collection) : self
+    public function setCollection(CollectionInterface $collection) : self
     {
         $this->mount($collection);
 
@@ -84,21 +85,6 @@ class Api extends Micro
     }
 
     /**
-     * Set resource.
-     *
-     * @param Resource $resource
-     *
-     * @return \Nilnice\Phalcon\Api
-     */
-    public function setResource(Resource $resource) : self
-    {
-        $this->mount($resource);
-
-        return $this;
-    }
-
-
-    /**
      * Mounts a collection of handlers.
      *
      * @param \Phalcon\Mvc\Micro\CollectionInterface $collection
@@ -107,6 +93,7 @@ class Api extends Micro
      */
     public function mount(CollectionInterface $collection) : Micro
     {
+        /** @var \Nilnice\Phalcon\Collection|\Nilnice\Phalcon\Resource $collection */
         if ($collection instanceof Collection) {
             $name = $collection->getName();
             $identifier = $collection->getPrefix();
