@@ -6,10 +6,7 @@ use Nilnice\Phalcon\Support\Arr;
 
 class Collection extends AbstractCollection
 {
-    /**
-     * @var string
-     */
-    protected $collectionKey;
+    use CollectionTrait;
 
     /**
      * @var array
@@ -55,47 +52,6 @@ class Collection extends AbstractCollection
         }
 
         return $collection;
-    }
-
-    /**
-     * Set the main handler.
-     *
-     * @param string $handler
-     * @param bool   $lazy
-     *
-     * @return $this
-     */
-    public function setMainHandler(
-        string $handler,
-        bool $lazy = true
-    ) : self {
-        $this->setHandler($handler, $lazy);
-
-        return $this;
-    }
-
-    /**
-     * Set collection key.
-     *
-     * @param string $collectionKey
-     *
-     * @return \Nilnice\Phalcon\Collection
-     */
-    public function setCollectionKey(string $collectionKey) : self
-    {
-        $this->collectionKey = $collectionKey;
-
-        return $this;
-    }
-
-    /**
-     * Get collection key.
-     *
-     * @return string
-     */
-    public function getCollectionKey() : string
-    {
-        return $this->collectionKey ?: $this->name ?: 'item';
     }
 
     /**

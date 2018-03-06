@@ -8,6 +8,8 @@ use Phalcon\Di;
 
 class Resource extends AbstractCollection
 {
+    use CollectionTrait;
+
     /**
      * @var string
      */
