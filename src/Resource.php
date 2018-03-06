@@ -27,9 +27,13 @@ class Resource extends \Phalcon\Mvc\Micro\Collection
 
     /**
      * Resource constructor.
+     *
+     * @param string $prefix
      */
-    public function __construct()
+    public function __construct(string $prefix)
     {
+        $this->setPrefix($prefix);
+
         if (method_exists($this, 'initialize')) {
             $this->initialize();
         }
