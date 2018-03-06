@@ -2,9 +2,7 @@
 
 namespace Nilnice\Phalcon\Http;
 
-use Phalcon\Http\Request as PhalconRequest;
-
-class Request extends PhalconRequest
+class Request extends \Phalcon\Http\Request
 {
     public const GET = 'GET';
     public const POST = 'POST';

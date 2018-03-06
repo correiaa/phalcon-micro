@@ -10,6 +10,9 @@ class Service
     // Http response.
     public const RESPONSE = 'response';
 
+    // Exception message code.
+    public const MESSAGE = 'message';
+
     // Configuration service.
     public const CONFIG = 'config';
 
