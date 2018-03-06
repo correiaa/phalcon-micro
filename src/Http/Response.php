@@ -33,7 +33,7 @@ class Response extends \Phalcon\Http\Response
                 $msg = $default['message'];
             }
         }
-        $info = ['code' => $code, 'msg' => $msg ?: 'Unknown.',];
+        $info = ['msg' => $msg ?: 'Unknown.',];
 
         if ($e instanceof Exception && $e->getUserInfo() !== null) {
             $info['userInfo'] = $e->getUserInfo();
@@ -58,9 +58,9 @@ class Response extends \Phalcon\Http\Response
         }
 
         $content = [
-            'status' => false,
-            'msg'    => $msg,
-            'data'   => $info,
+            'code'    => $code,
+            'message' => $msg,
+            'data'    => $info,
         ];
         $this->setJsonContent($content);
         $this->setStatusCode(500);
