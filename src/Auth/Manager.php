@@ -110,15 +110,15 @@ class Manager extends Plugin
 
         $startTime = time();
         $expirationTime = $this->duration + $startTime;
-        $JWTProvider = new JWTProvider(
+        $jwtProvider = new JWTProvider(
             $type,
             $identity,
             $startTime,
             $expirationTime
         );
-        $token = $this->jwtToken->getToken($JWTProvider);
-        $JWTProvider->setToken($token);
-        $this->jwtProvider = $JWTProvider;
+        $token = $this->jwtToken->getToken($jwtProvider);
+        $jwtProvider->setToken($token);
+        $this->jwtProvider = $jwtProvider;
 
         return $this->jwtProvider;
     }
@@ -138,30 +138,30 @@ class Manager extends Plugin
     public function authenticateToken($token) : bool
     {
         try {
-            $JWTToken = $this->jwtToken->getProvider($token);
+            $jwtToken = $this->jwtToken->getProvider($token);
         } catch (Exception $e) {
             throw new Exception(Tip::AUTH_TOKEN_INVALID);
         }
 
-        if (! $JWTToken) {
+        if (! $jwtToken) {
             return false;
         }
 
-        if ($JWTToken->getExpirationTime() < time()) {
+        if ($jwtToken->getExpirationTime() < time()) {
             throw new Exception(Tip::AUTH_TOKEN_EXPIRED);
         }
-        $JWTToken->setToken($token);
+        $jwtToken->setToken($token);
 
         /** @var \Nilnice\Phalcon\Auth\AccountTypeInterface $account */
-        $account = $this->getAccountType($JWTToken->getAccountTypeName());
+        $account = $this->getAccountType($jwtToken->getAccountTypeName());
         if (! $account) {
             throw new Exception(Tip::AUTH_TOKEN_FAILED);
         }
 
-        if (! $account->authenticate($JWTToken->getIdentity())) {
+        if (! $account->authenticate($jwtToken->getIdentity())) {
             throw new Exception(Tip::AUTH_TOKEN_INVALID);
         }
-        $this->jwtProvider = $JWTToken;
+        $this->jwtProvider = $jwtToken;
 
         return true;
     }

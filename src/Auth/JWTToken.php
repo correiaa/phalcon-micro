@@ -31,8 +31,10 @@ class JWTToken implements JWTTokenInterface
      *
      * @throws \Phalcon\Exception
      */
-    public function __construct($secret, $algorithm = self::ALGORITHM_HS256)
-    {
+    public function __construct(
+        string $secret,
+        string $algorithm = self::ALGORITHM_HS256
+    ) {
         if (! class_exists(JWT::class)) {
             throw new Exception('You need to load the JWT class.');
         }
@@ -41,16 +43,20 @@ class JWTToken implements JWTTokenInterface
     }
 
     /**
-     * @param $secret
+     * Set secret.
+     *
+     * @param string $secret
      *
      * @return string
      */
-    public function setSecret($secret) : string
+    public function setSecret(string $secret) : string
     {
         $this->secret = $secret;
     }
 
     /**
+     * Get secret.
+     *
      * @return string
      */
     public function getSecret() : string
@@ -59,7 +65,9 @@ class JWTToken implements JWTTokenInterface
     }
 
     /**
-     * @param $algorithm
+     * Set algorithm.
+     *
+     * @param string $algorithm
      *
      * @return string
      */
@@ -69,6 +77,8 @@ class JWTToken implements JWTTokenInterface
     }
 
     /**
+     * Get algorithm.
+     *
      * @return string
      */
     public function getAlgorithm() : string
@@ -77,24 +87,28 @@ class JWTToken implements JWTTokenInterface
     }
 
     /**
-     * @param \Nilnice\Phalcon\Auth\Provider\JWTProvider $JWTProvider
+     * Get token.
+     *
+     * @param \Nilnice\Phalcon\Auth\Provider\JWTProvider $jwtProvider
      *
      * @return string
      */
-    public function getToken(JWTProvider $JWTProvider) : string
+    public function getToken(JWTProvider $jwtProvider) : string
     {
-        $data = $this->payload(
-            $JWTProvider->getAccountTypeName(),
-            $JWTProvider->getIdentity(),
-            $JWTProvider->getStartTime(),
-            $JWTProvider->getExpirationTime()
-        );
+        $data = [
+            'iss' => $jwtProvider->getAccountTypeName(),
+            'sub' => $jwtProvider->getIdentity(),
+            'iat' => $jwtProvider->getStartTime(),
+            'exp' => $jwtProvider->getExpirationTime(),
+        ];
 
         return $this->encode($data);
     }
 
     /**
-     * @param $token
+     * Converts and signs a PHP object or array into a JWT string.
+     *
+     * @param object|array $token
      *
      * @return string
      */
@@ -104,6 +118,8 @@ class JWTToken implements JWTTokenInterface
     }
 
     /**
+     * Decodes a JWT string into a PHP object.
+     *
      * @param string $token
      *
      * @return object
@@ -118,6 +134,8 @@ class JWTToken implements JWTTokenInterface
     }
 
     /**
+     * Get JWTProvider.
+     *
      * @param string $token
      *
      * @return \Nilnice\Phalcon\Auth\Provider\JWTProvider
@@ -136,23 +154,5 @@ class JWTToken implements JWTTokenInterface
             $token->iat,
             $token->exp
         );
-    }
-
-    /**
-     * @param string $iss
-     * @param mixed  $user
-     * @param int    $iat
-     * @param int    $exp
-     *
-     * @return array
-     */
-    private function payload($iss, $user, $iat, $exp) : array
-    {
-        return [
-            'iss' => $iss,
-            'sub' => $user,
-            'iat' => $iat,
-            'exp' => $exp,
-        ];
     }
 }

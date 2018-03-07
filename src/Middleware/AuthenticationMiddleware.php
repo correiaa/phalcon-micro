@@ -21,14 +21,13 @@ class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
      * @param \Phalcon\Events\Event $event
      * @param \Nilnice\Phalcon\App  $app
      *
-     * @return null|string
      * @throws \Firebase\JWT\BeforeValidException
      * @throws \Firebase\JWT\ExpiredException
      * @throws \Firebase\JWT\SignatureInvalidException
      * @throws \Phalcon\Exception
      * @throws \UnexpectedValueException
      */
-    public function beforeExecuteRoute(Event $event, App $app) : ? string
+    public function beforeExecuteRoute(Event $event, App $app)
     {
         $token = $app->request->getToken();
 
