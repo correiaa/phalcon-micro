@@ -65,12 +65,12 @@ class Resource extends \Phalcon\Mvc\Micro\Collection
      * @param string      $prefix
      * @param string|null $name
      *
-     * @return Resource
+     * @return $this
      */
     public static function factory(
         string $prefix,
         string $name = null
-    ) : Resource {
+    ) : self {
         $class = static::class;
 
         /** @var \Nilnice\Phalcon\Resource $resource */

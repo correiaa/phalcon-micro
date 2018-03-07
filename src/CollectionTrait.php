@@ -132,9 +132,9 @@ trait CollectionTrait
      *
      * @param string $collectionKey
      *
-     * @return \Phalcon\Mvc\Collection
+     * @return $this
      */
-    public function setCollectionKey(string $collectionKey) : Collection
+    public function setCollectionKey(string $collectionKey) : self
     {
         $this->collectionKey = $collectionKey;
 

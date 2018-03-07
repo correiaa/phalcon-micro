@@ -5,6 +5,11 @@ namespace Nilnice\Phalcon;
 use Nilnice\Phalcon\Http\Request;
 use Nilnice\Phalcon\Support\Arr;
 
+/**
+ * @method Endpoint setEndpoint(Endpoint $endpoint) : Endpoint
+ * @method Endpoint getEndpoint(string $name)
+ * @method Endpoint getEndpoints() : array
+ */
 class Endpoint
 {
     public const ALL = 'all';
@@ -70,7 +75,7 @@ class Endpoint
      * @param string      $method
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function factory(
         string $path,
@@ -81,7 +86,7 @@ class Endpoint
     }
 
     /**
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function all() : Endpoint
     {
@@ -91,7 +96,7 @@ class Endpoint
     }
 
     /**
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function find() : Endpoint
     {
@@ -101,7 +106,7 @@ class Endpoint
     }
 
     /**
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function create() : Endpoint
     {
@@ -111,7 +116,7 @@ class Endpoint
     }
 
     /**
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function update() : Endpoint
     {
@@ -121,7 +126,7 @@ class Endpoint
     }
 
     /**
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function remove() : Endpoint
     {
@@ -134,7 +139,7 @@ class Endpoint
      * @param string      $path
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function get(string $path, $handler = null) : Endpoint
     {
@@ -145,7 +150,7 @@ class Endpoint
      * @param string      $path
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function post(string $path, string $handler = null) : Endpoint
     {
@@ -156,7 +161,7 @@ class Endpoint
      * @param string      $path
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function put(string $path, string $handler = null) : Endpoint
     {
@@ -167,7 +172,7 @@ class Endpoint
      * @param string      $path
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function delete(
         string $path,
@@ -180,7 +185,7 @@ class Endpoint
      * @param string      $path
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function head(string $path, string $handler = null) : Endpoint
     {
@@ -191,7 +196,7 @@ class Endpoint
      * @param string      $path
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function options(
         string $path,
@@ -204,7 +209,7 @@ class Endpoint
      * @param string      $path
      * @param string|null $handler
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public static function patch(
         string $path,
@@ -320,7 +325,7 @@ class Endpoint
      *
      * @param ...array $roles
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public function setAllowRoles() : self
     {
@@ -341,7 +346,7 @@ class Endpoint
      */
     public function getAllowRole() : array
     {
-        return $this->allowRole;
+        return $this->allowedRoles;
     }
 
     /**
@@ -349,7 +354,7 @@ class Endpoint
      *
      * @param ...array $roles
      *
-     * @return \Nilnice\Phalcon\Endpoint
+     * @return Endpoint
      */
     public function setDenyRoles() : self
     {
@@ -370,6 +375,6 @@ class Endpoint
      */
     public function getDenyRole() : array
     {
-        return $this->denyRole;
+        return $this->deniedRoles;
     }
 }
