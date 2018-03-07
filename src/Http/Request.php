@@ -45,9 +45,9 @@ class Request extends \Phalcon\Http\Request
     /**
      * Get authentication token.
      *
-     * @return string
+     * @return null|string
      */
-    public function getToken() : string
+    public function getToken() : ? string
     {
         $headerToken = $this->getHeader('AUTHORIZATION');
         $queryToken = $this->getQuery('token');
