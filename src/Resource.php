@@ -3,7 +3,7 @@
 namespace Nilnice\Phalcon;
 
 use Nilnice\Phalcon\Constant\Service;
-use Nilnice\Phalcon\Controller\ResourceController;
+use Nilnice\Phalcon\Controller\AppController;
 use Phalcon\Di;
 
 class Resource extends \Phalcon\Mvc\Micro\Collection
@@ -85,7 +85,7 @@ class Resource extends \Phalcon\Mvc\Micro\Collection
         }
 
         if (! $resource->getHandler()) {
-            $resource->setHandler(ResourceController::class);
+            $resource->setHandler(AppController::class);
         }
 
 

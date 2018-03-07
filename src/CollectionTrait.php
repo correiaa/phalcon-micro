@@ -3,7 +3,6 @@
 namespace Nilnice\Phalcon;
 
 use Nilnice\Phalcon\Http\Request;
-use Phalcon\Mvc\Collection;
 
 trait CollectionTrait
 {

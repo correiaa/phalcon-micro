@@ -5,11 +5,6 @@ namespace Nilnice\Phalcon;
 use Nilnice\Phalcon\Http\Request;
 use Nilnice\Phalcon\Support\Arr;
 
-/**
- * @method Endpoint setEndpoint(Endpoint $endpoint) : Endpoint
- * @method Endpoint getEndpoint(string $name)
- * @method Endpoint getEndpoints() : array
- */
 class Endpoint
 {
     public const ALL = 'all';
