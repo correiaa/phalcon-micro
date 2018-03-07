@@ -2,7 +2,7 @@
 
 namespace Nilnice\Phalcon\Middleware;
 
-use Nilnice\Phalcon\Api;
+use Nilnice\Phalcon\App;
 use Phalcon\Events\Event;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\MiddlewareInterface;
@@ -19,7 +19,7 @@ class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
      * Before anything happens.
      *
      * @param \Phalcon\Events\Event $event
-     * @param \Nilnice\Phalcon\Api  $api
+     * @param \Nilnice\Phalcon\App  $app
      *
      * @return null|string
      * @throws \Firebase\JWT\BeforeValidException
@@ -28,9 +28,9 @@ class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
      * @throws \Phalcon\Exception
      * @throws \UnexpectedValueException
      */
-    public function beforeExecuteRoute(Event $event, Api $api) : ? string
+    public function beforeExecuteRoute(Event $event, App $app) : ? string
     {
-        $token = $api->request->getToken();
+        $token = $app->request->getToken();
 
         if ($token) {
             $this->authManager->authenticateToken($token);

@@ -33,8 +33,9 @@ class Response extends \Phalcon\Http\Response
                 $msg = $default['message'];
             }
         }
-        $info = ['msg' => $msg ?: 'Unknown.',];
 
+        $info = [];
+        $msg = $msg ?? 'Unknown exception';
         if ($e instanceof Exception && $e->getUserInfo() !== null) {
             $info['userInfo'] = $e->getUserInfo();
         }
@@ -45,6 +46,7 @@ class Response extends \Phalcon\Http\Response
             $devInfo = [
                 'file'          => $e->getFile(),
                 'line'          => $e->getLine(),
+                'message'       => $msg,
                 'request'       => $method . ' ' . $uri,
                 'previous'      => $e->getPrevious(),
                 'trace'         => $e->getTrace(),

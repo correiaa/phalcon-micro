@@ -12,7 +12,7 @@ use Phalcon\Mvc\Micro\MiddlewareInterface;
  * @property \Nilnice\Phalcon\Http\Request  $request
  * @property \Nilnice\Phalcon\Http\Response $response
  */
-class Api extends Micro
+class App extends Micro
 {
     /**
      * @var array
@@ -34,7 +34,7 @@ class Api extends Micro
      *
      * @param \Phalcon\Mvc\Micro\MiddlewareInterface $middleware
      *
-     * @return \Nilnice\Phalcon\Api
+     * @return \Nilnice\Phalcon\App
      */
     public function attach(MiddlewareInterface $middleware) : self
     {
@@ -53,7 +53,7 @@ class Api extends Micro
      *
      * @param \Phalcon\Mvc\Micro\CollectionInterface $collection
      *
-     * @return \Nilnice\Phalcon\Api
+     * @return \Nilnice\Phalcon\App
      */
     public function setCollection(CollectionInterface $collection) : self
     {
