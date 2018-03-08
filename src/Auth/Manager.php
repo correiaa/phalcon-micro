@@ -150,10 +150,7 @@ class Manager extends Plugin
         try {
             $jwtToken = $this->jwtToken->getProvider($token);
         } catch (\Exception $e) {
-            throw new Exception(
-                'The JWT provider may be invalid',
-                Code::AUTH_TOKEN_INVALID
-            );
+            throw new Exception($e->getMessage(), Code::AUTH_TOKEN_INVALID);
         }
 
         if (! $jwtToken) {
