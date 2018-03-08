@@ -1,16 +1,16 @@
 <?php
 
-namespace Nilnice\Phalcon;
+namespace Nilnice\Phalcon\Exception;
 
 class Exception extends \Exception
 {
     /**
-     * @var array|null
+     * @var array
      */
     protected $devInfo;
 
     /**
-     * @var array|null
+     * @var array
      */
     protected $userInfo;
 
@@ -27,8 +27,8 @@ class Exception extends \Exception
         string $message = '',
         int $code = 0,
         \Throwable $previous = null,
-        array $devInfo = null,
-        array $userInfo = null
+        array $devInfo = [],
+        array $userInfo = []
     ) {
         parent::__construct($message, $code, $previous);
 
@@ -37,17 +37,17 @@ class Exception extends \Exception
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getDevInfo() : ? array
+    public function getDevInfo() : array
     {
         return $this->devInfo;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getUserInfo() : ? array
+    public function getUserInfo() : array
     {
         return $this->userInfo;
     }

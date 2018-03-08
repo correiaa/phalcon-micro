@@ -4,7 +4,7 @@ namespace Nilnice\Phalcon\Auth;
 
 use Nilnice\Phalcon\Auth\Provider\JWTProvider;
 use Nilnice\Phalcon\Constant\Tip;
-use Phalcon\Exception;
+use Nilnice\Phalcon\Exception\Exception;
 use Phalcon\Mvc\User\Plugin;
 
 /**
@@ -68,7 +68,7 @@ class Manager extends Plugin
      * @param string $password
      *
      * @return \Nilnice\Phalcon\Auth\Provider\JWTProvider
-     * @throws \Phalcon\Exception
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     public function loginWithUsernamePassword(
         string $type,
@@ -90,14 +90,17 @@ class Manager extends Plugin
      * @param array  $array
      *
      * @return \Nilnice\Phalcon\Auth\Provider\JWTProvider
-     * @throws \Phalcon\Exception
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     public function login(string $type, array $array) : JWTProvider
     {
         $account = $this->getAccountType($type);
 
         if (! $account) {
-            throw new Exception(Tip::AUTH_ACCOUNT_TYPE_INVALID);
+            throw new Exception(
+                'Account type invalid.',
+                Tip::AUTH_ACCOUNT_TYPE_INVALID
+            );
         }
 
         if (! $account instanceof AccountTypeInterface) {
@@ -105,7 +108,7 @@ class Manager extends Plugin
         }
 
         if (! $identity = $account->login($array)) {
-            throw new Exception(Tip::AUTH_LOGIN_FAILED);
+            throw new Exception('User not exists.', Tip::AUTH_LOGIN_FAILED);
         }
 
         $startTime = time();
@@ -129,18 +132,14 @@ class Manager extends Plugin
      * @param $token
      *
      * @return bool
-     * @throws \Firebase\JWT\BeforeValidException
-     * @throws \Firebase\JWT\ExpiredException
-     * @throws \Firebase\JWT\SignatureInvalidException
-     * @throws \Phalcon\Exception
-     * @throws \UnexpectedValueException
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     public function authenticateToken($token) : bool
     {
         try {
             $jwtToken = $this->jwtToken->getProvider($token);
-        } catch (Exception $e) {
-            throw new Exception(Tip::AUTH_TOKEN_INVALID);
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage(), Tip::AUTH_TOKEN_INVALID);
         }
 
         if (! $jwtToken) {
@@ -148,18 +147,18 @@ class Manager extends Plugin
         }
 
         if ($jwtToken->getExpirationTime() < time()) {
-            throw new Exception(Tip::AUTH_TOKEN_EXPIRED);
+            throw new Exception('Token expired.', Tip::AUTH_TOKEN_EXPIRED);
         }
         $jwtToken->setToken($token);
 
         /** @var \Nilnice\Phalcon\Auth\AccountTypeInterface $account */
         $account = $this->getAccountType($jwtToken->getAccountTypeName());
         if (! $account) {
-            throw new Exception(Tip::AUTH_TOKEN_FAILED);
+            throw new Exception('Token failed.', Tip::AUTH_TOKEN_FAILED);
         }
 
         if (! $account->authenticate($jwtToken->getIdentity())) {
-            throw new Exception(Tip::AUTH_TOKEN_INVALID);
+            throw new Exception('Token failed.', Tip::AUTH_TOKEN_INVALID);
         }
         $this->jwtProvider = $jwtToken;
 
