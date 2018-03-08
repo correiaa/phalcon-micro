@@ -39,9 +39,17 @@ class Message
                 'code'    => 401,
                 'message' => 'Unauthorized',
             ],
-            Tip::AUTH_USER_NOT_FOUND       => [
-                'code'    => 404,
-                'message' => 'Not found',
+            Tip::USER_NOT_EXIST            => [
+                'code'    => 400,
+                'message' => 'User not exist',
+            ],
+            Tip::USER_PASS_ERROR           => [
+                'code'    => 400,
+                'message' => 'User password error',
+            ],
+            Tip::USER_LOCKED               => [
+                'code'    => 400,
+                'message' => 'User is locked',
             ],
             Tip::ACCESS_DENIED             => [
                 'code'    => 403,
