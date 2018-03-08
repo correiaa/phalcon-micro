@@ -105,7 +105,8 @@ class App extends Micro
 
             /** @var \Nilnice\Phalcon\Endpoint $endpoint */
             foreach ($collection->getEndpoints() as $endpoint) {
-                $identifier = $collection->getIdentifier() . ' '
+                $identifier = $collection->getIdentifier()
+                    . ' '
                     . $endpoint->getIdentifier();
 
                 $this->endpointByIdentifier[$identifier] = $endpoint;

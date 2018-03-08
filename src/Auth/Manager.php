@@ -3,7 +3,7 @@
 namespace Nilnice\Phalcon\Auth;
 
 use Nilnice\Phalcon\Auth\Provider\JWTProvider;
-use Nilnice\Phalcon\Constant\Tip;
+use Nilnice\Phalcon\Constant\Code;
 use Nilnice\Phalcon\Exception\Exception;
 use Phalcon\Mvc\User\Plugin;
 
@@ -98,15 +98,15 @@ class Manager extends Plugin
 
         if (! $accountType) {
             throw new Exception(
-                'Account type invalid',
-                Tip::AUTH_ACCOUNT_TYPE_INVALID
+                'The account type may not exist',
+                Code::AUTH_ACCOUNT_TYPE_INVALID
             );
         }
 
         if (! $accountType instanceof AccountTypeInterface) {
             throw new Exception(
-                'Account type must be an instance of AccountTypeInterface',
-                Tip::FAILED
+                'The account type must be an instance of AccountTypeInterface',
+                Code::INTERFACE_IMPLEMENT_ERROR
             );
         }
 
@@ -150,7 +150,10 @@ class Manager extends Plugin
         try {
             $jwtToken = $this->jwtToken->getProvider($token);
         } catch (\Exception $e) {
-            throw new Exception($e->getMessage(), Tip::AUTH_TOKEN_INVALID);
+            throw new Exception(
+                'The JWT provider may be invalid',
+                Code::AUTH_TOKEN_INVALID
+            );
         }
 
         if (! $jwtToken) {
@@ -158,18 +161,27 @@ class Manager extends Plugin
         }
 
         if ($jwtToken->getExpirationTime() < time()) {
-            throw new Exception('Token expired.', Tip::AUTH_TOKEN_EXPIRED);
+            throw new Exception(
+                'The token may be expired',
+                Code::AUTH_TOKEN_EXPIRED
+            );
         }
         $jwtToken->setToken($token);
 
         /** @var \Nilnice\Phalcon\Auth\AccountTypeInterface $account */
         $account = $this->getAccountType($jwtToken->getAccountTypeName());
         if (! $account) {
-            throw new Exception('Token failed.', Tip::AUTH_TOKEN_FAILED);
+            throw new Exception(
+                'The account type may not exist',
+                Code::AUTH_ACCOUNT_TYPE_INVALID
+            );
         }
 
         if (! $account->authenticate($jwtToken->getIdentity())) {
-            throw new Exception('Token failed.', Tip::AUTH_TOKEN_INVALID);
+            throw new Exception(
+                'The token authentication may failed',
+                Code::AUTH_TOKEN_INVALID
+            );
         }
         $this->jwtProvider = $jwtToken;
 
@@ -208,16 +220,16 @@ class Manager extends Plugin
 
         switch ($identity) {
             case '-1':
-                $code = Tip::USER_NOT_EXIST;
-                $message = 'User does not exist';
+                $code = Code::USER_NOT_EXIST;
+                $message = 'The user may not exist';
                 break;
             case '-2':
-                $code = Tip::USER_PASS_ERROR;
-                $message = 'User password error';
+                $code = Code::USER_PASS_ERROR;
+                $message = 'The user password may be wrong';
                 break;
             case '-3':
-                $code = Tip::USER_LOCKED;
-                $message = 'User is locked';
+                $code = Code::USER_LOCKED;
+                $message = 'The user may be locked up';
                 break;
             default:
                 $code = 0;

@@ -2,14 +2,8 @@
 
 namespace Nilnice\Phalcon\Constant;
 
-class Tip
+class Code
 {
-    // Successful operation.
-    public const SUCCESS = 200000;
-
-    // Failed operation.
-    public const FAILED = 400000;
-
     // Account type invalid.
     public const AUTH_ACCOUNT_TYPE_INVALID = 200101;
 
@@ -44,5 +38,5 @@ class Tip
     public const ACCESS_DENIED = 200111;
 
     // Class implementation error.
-    public const CLASS_IMPLEMENT_ERROR = 200112;
+    public const INTERFACE_IMPLEMENT_ERROR = 200112;
 }

@@ -2,7 +2,7 @@
 
 namespace Nilnice\Phalcon\Support;
 
-use Nilnice\Phalcon\Constant\Tip;
+use Nilnice\Phalcon\Constant\Code;
 
 class Message
 {
@@ -11,53 +11,53 @@ class Message
      */
     protected static $messages
         = [
-            Tip::AUTH_ACCOUNT_TYPE_INVALID => [
+            Code::AUTH_ACCOUNT_TYPE_INVALID => [
                 'code'    => 401,
                 'message' => 'Account type invalid',
             ],
-            Tip::AUTH_JWT_INVALID          => [
+            Code::AUTH_JWT_INVALID          => [
                 'code'    => 401,
                 'message' => 'JWT invalid',
             ],
-            Tip::AUTH_LOGIN_FAILED         => [
+            Code::AUTH_LOGIN_FAILED         => [
                 'code'    => 401,
                 'message' => 'Login failed',
             ],
-            Tip::AUTH_TOKEN_EXPIRED        => [
+            Code::AUTH_TOKEN_EXPIRED        => [
                 'code'    => 401,
                 'message' => 'Token expired',
             ],
-            Tip::AUTH_TOKEN_INVALID        => [
+            Code::AUTH_TOKEN_INVALID        => [
                 'code'    => 401,
                 'message' => 'Token invalid',
             ],
-            Tip::AUTH_TOKEN_FAILED         => [
+            Code::AUTH_TOKEN_FAILED         => [
                 'code'    => 401,
                 'message' => 'Login failed',
             ],
-            Tip::AUTH_UNAUTHORIZED         => [
+            Code::AUTH_UNAUTHORIZED         => [
                 'code'    => 401,
                 'message' => 'Unauthorized',
             ],
-            Tip::USER_NOT_EXIST            => [
+            Code::USER_NOT_EXIST            => [
                 'code'    => 400,
-                'message' => 'User not exist',
+                'message' => 'User does not exist',
             ],
-            Tip::USER_PASS_ERROR           => [
+            Code::USER_PASS_ERROR           => [
                 'code'    => 400,
                 'message' => 'User password error',
             ],
-            Tip::USER_LOCKED               => [
+            Code::USER_LOCKED               => [
                 'code'    => 400,
                 'message' => 'User is locked',
             ],
-            Tip::ACCESS_DENIED             => [
+            Code::ACCESS_DENIED             => [
                 'code'    => 403,
                 'message' => 'Forbidden',
             ],
-            Tip::CLASS_IMPLEMENT_ERROR     => [
+            Code::INTERFACE_IMPLEMENT_ERROR => [
                 'code'    => 400,
-                'message' => 'Class implementation error',
+                'message' => 'Interface implementation error',
             ],
         ];
 

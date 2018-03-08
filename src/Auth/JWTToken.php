@@ -3,7 +3,7 @@
 namespace Nilnice\Phalcon\Auth;
 
 use Nilnice\Phalcon\Auth\Provider\JWTProvider;
-use Nilnice\Phalcon\Constant\Tip;
+use Nilnice\Phalcon\Constant\Code;
 use Nilnice\Phalcon\Exception\Exception;
 use Firebase\JWT\JWT;
 
@@ -38,8 +38,8 @@ class JWTToken implements JWTTokenInterface
     ) {
         if (! class_exists(JWT::class)) {
             throw new Exception(
-                'You need to load the JWT class',
-                Tip::AUTH_JWT_INVALID
+                'The JWT class may not be loaded correctly',
+                Code::AUTH_JWT_INVALID
             );
         }
         $this->secret = $secret;
