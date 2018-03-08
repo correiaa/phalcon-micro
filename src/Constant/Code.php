@@ -25,18 +25,21 @@ class Code
     // Unauthorized.
     public const AUTH_UNAUTHORIZED = 200207;
 
+    // User authentication failed.
+    public const USER_AUTH_FAILED = 200208;
+
     // User does not exist.
-    public const USER_NOT_EXIST = 200108;
+    public const USER_NOT_EXIST = 200109;
 
     // User password error.
-    public const USER_PASS_ERROR = 200109;
+    public const USER_PASS_ERROR = 200110;
 
     // User is locked.
-    public const USER_LOCKED = 200110;
+    public const USER_LOCKED = 200111;
 
     // Access denied.
-    public const ACCESS_DENIED = 200111;
+    public const ACCESS_DENIED = 200112;
 
-    // Class implementation error.
-    public const INTERFACE_IMPLEMENT_ERROR = 200112;
+    // Interface implementation error.
+    public const INTERFACE_IMPLEMENT_ERROR = 200113;
 }

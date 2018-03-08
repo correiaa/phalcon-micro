@@ -176,8 +176,8 @@ class Manager extends Plugin
 
         if (! $account->authenticate($jwtToken->getIdentity())) {
             throw new Exception(
-                'The token authentication may failed',
-                Code::AUTH_TOKEN_INVALID
+                'The user authentication may failed',
+                Code::USER_AUTH_FAILED
             );
         }
         $this->jwtProvider = $jwtToken;
