@@ -21,11 +21,7 @@ class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
      * @param \Phalcon\Events\Event $event
      * @param \Nilnice\Phalcon\App  $app
      *
-     * @throws \Firebase\JWT\BeforeValidException
-     * @throws \Firebase\JWT\ExpiredException
-     * @throws \Firebase\JWT\SignatureInvalidException
-     * @throws \Phalcon\Exception
-     * @throws \UnexpectedValueException
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     public function beforeExecuteRoute(Event $event, App $app)
     {
