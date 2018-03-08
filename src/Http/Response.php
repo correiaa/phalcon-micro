@@ -3,7 +3,7 @@
 namespace Nilnice\Phalcon\Http;
 
 use Nilnice\Phalcon\Constant\Service;
-use Nilnice\Phalcon\Exception;
+use Nilnice\Phalcon\Exception\Exception;
 
 class Response extends \Phalcon\Http\Response
 {
