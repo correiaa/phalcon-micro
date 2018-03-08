@@ -44,7 +44,6 @@ class Response extends \Phalcon\Http\Response
             $method = $request->getMethod();
             $uri = $request->getURI();
             $devInfo = [
-                'code'          => $e->getCode(),
                 'message'       => $e->getMessage(),
                 'file'          => $e->getFile(),
                 'line'          => $e->getLine(),
@@ -61,7 +60,7 @@ class Response extends \Phalcon\Http\Response
         }
 
         $content = [
-            'code'    => $code,
+            'code'    => $e->getCode(),
             'message' => $msg,
             'data'    => $info,
         ];
