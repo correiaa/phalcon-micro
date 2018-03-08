@@ -44,9 +44,10 @@ class Response extends \Phalcon\Http\Response
             $method = $request->getMethod();
             $uri = $request->getURI();
             $devInfo = [
+                'code'          => $e->getCode(),
+                'message'       => $e->getMessage(),
                 'file'          => $e->getFile(),
                 'line'          => $e->getLine(),
-                'message'       => $msg,
                 'request'       => $method . ' ' . $uri,
                 'previous'      => $e->getPrevious(),
                 'trace'         => $e->getTrace(),
