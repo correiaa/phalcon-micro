@@ -94,27 +94,32 @@ class Manager extends Plugin
      */
     public function login(string $type, array $array) : JWTProvider
     {
-        $account = $this->getAccountType($type);
+        $accountType = $this->getAccountType($type);
 
-        if (! $account) {
+        if (! $accountType) {
             throw new Exception(
                 'Account type invalid',
                 Tip::AUTH_ACCOUNT_TYPE_INVALID
             );
         }
 
-        if (! $account instanceof AccountTypeInterface) {
+        if (! $accountType instanceof AccountTypeInterface) {
             throw new Exception(
                 'Account type must be an instance of AccountTypeInterface',
                 Tip::FAILED
             );
         }
 
-        if (! $identity = $account->login($array)) {
-            throw new Exception(
-                'User not exists',
-                Tip::AUTH_USER_NOT_FOUND
-            );
+        $data = $this->getIdentity($accountType, $array);
+        [
+            'code'     => $code,
+            'message'  => $message,
+            'identity' => $identity,
+        ]
+            = $data;
+
+        if ($code && $message) {
+            throw new Exception($message, $code);
         }
 
         $startTime = time();
@@ -185,5 +190,47 @@ class Manager extends Plugin
         }
 
         return null;
+    }
+
+    /**
+     * Get identify.
+     *
+     * @param \Nilnice\Phalcon\Auth\AccountTypeInterface $accountType
+     * @param array                                      $array
+     *
+     * @return array
+     */
+    private function getIdentity(
+        AccountTypeInterface $accountType,
+        array $array
+    ) : array {
+        $identity = $accountType->login($array);
+
+        switch ($identity) {
+            case '-1':
+                $code = Tip::USER_NOT_EXIST;
+                $message = 'User does not exist';
+                break;
+            case '-2':
+                $code = Tip::USER_PASS_ERROR;
+                $message = 'User password error';
+                break;
+            case '-3':
+                $code = Tip::USER_LOCKED;
+                $message = 'User is locked';
+                break;
+            default:
+                $code = 0;
+                $message = '';
+                break;
+        }
+
+        $data = [
+            'code'     => $code,
+            'message'  => $message,
+            'identity' => $identity,
+        ];
+
+        return $data;
     }
 }

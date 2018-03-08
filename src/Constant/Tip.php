@@ -31,12 +31,18 @@ class Tip
     // Unauthorized.
     public const AUTH_UNAUTHORIZED = 200207;
 
-    // User not found.
-    public const AUTH_USER_NOT_FOUND = 200108;
+    // User does not exist.
+    public const USER_NOT_EXIST = 200108;
+
+    // User password error.
+    public const USER_PASS_ERROR = 200109;
+
+    // User is locked.
+    public const USER_LOCKED = 200110;
 
     // Access denied.
-    public const ACCESS_DENIED = 200109;
+    public const ACCESS_DENIED = 200111;
 
     // Class implementation error.
-    public const CLASS_IMPLEMENT_ERROR = 200110;
+    public const CLASS_IMPLEMENT_ERROR = 200112;
 }
