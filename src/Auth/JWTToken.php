@@ -3,8 +3,8 @@
 namespace Nilnice\Phalcon\Auth;
 
 use Nilnice\Phalcon\Auth\Provider\JWTProvider;
+use Nilnice\Phalcon\Exception\Exception;
 use Firebase\JWT\JWT;
-use Phalcon\Exception;
 
 class JWTToken implements JWTTokenInterface
 {
@@ -29,7 +29,7 @@ class JWTToken implements JWTTokenInterface
      * @param string $secret
      * @param string $algorithm
      *
-     * @throws \Phalcon\Exception
+     * @throws \Nilnice\Phalcon\Exception\Exception
      */
     public function __construct(
         string $secret,
