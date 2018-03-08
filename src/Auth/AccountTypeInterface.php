@@ -9,9 +9,9 @@ interface AccountTypeInterface
      *
      * @param array $data
      *
-     * @return string
+     * @return null|string
      */
-    public function login(array $data) : string;
+    public function login(array $data) : ? string;
 
     /**
      * User authentication.
