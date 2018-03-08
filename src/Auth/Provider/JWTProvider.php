@@ -4,23 +4,33 @@ namespace Nilnice\Phalcon\Auth\Provider;
 
 class JWTProvider
 {
-    /** @var string Account type name. */
+    /**
+     * @var string Account type name.
+     */
     private $accountTypeName;
 
-    /** @var string Account type name of the session. */
+    /**
+     * @var string Account type name of the session.
+     */
     private $identity;
 
-    /** @var int Start time. */
+    /**
+     * @var int Start time.
+     */
     private $startTime;
 
-    /** @var int Expiration time. */
+    /**
+     * @var int Expiration time.
+     */
     private $expirationTime;
 
-    /** @var string|null Token. */
+    /**
+     * @var null|string Access token.
+     */
     private $token;
 
     /**
-     * SessionStorage constructor.
+     * JWTProvider constructor.
      *
      * @param string      $accountTypeName
      * @param string      $identity
@@ -29,11 +39,11 @@ class JWTProvider
      * @param null|string $token
      */
     public function __construct(
-        $accountTypeName,
-        $identity,
-        $startTime,
-        $expirationTime,
-        $token = null
+        string $accountTypeName,
+        string $identity,
+        int $startTime,
+        int $expirationTime,
+        ? string $token = null
     ) {
         $this->accountTypeName = $accountTypeName;
         $this->identity = $identity;
@@ -45,7 +55,7 @@ class JWTProvider
     /**
      * @param string $accountTypeName
      */
-    public function setAccountTypeName($accountTypeName)
+    public function setAccountTypeName(string $accountTypeName) : void
     {
         $this->accountTypeName = $accountTypeName;
     }
@@ -53,7 +63,7 @@ class JWTProvider
     /**
      * @return string
      */
-    public function getAccountTypeName()
+    public function getAccountTypeName() : string
     {
         return $this->accountTypeName;
     }
@@ -61,15 +71,15 @@ class JWTProvider
     /**
      * @param string $identity
      */
-    public function setIdentity($identity)
+    public function setIdentity(string $identity) : void
     {
         $this->identity = $identity;
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getIdentity()
+    public function getIdentity() : ? string
     {
         return $this->identity;
     }
@@ -77,7 +87,7 @@ class JWTProvider
     /**
      * @param int $startTime
      */
-    public function setStartTime($startTime)
+    public function setStartTime(int $startTime) : void
     {
         $this->startTime = $startTime;
     }
@@ -85,7 +95,7 @@ class JWTProvider
     /**
      * @return int
      */
-    public function getStartTime()
+    public function getStartTime() : int
     {
         return $this->startTime;
     }
@@ -93,7 +103,7 @@ class JWTProvider
     /**
      * @param int $expirationTime
      */
-    public function setExpirationTime($expirationTime)
+    public function setExpirationTime($expirationTime) : void
     {
         $this->expirationTime = $expirationTime;
     }
@@ -101,23 +111,23 @@ class JWTProvider
     /**
      * @return int
      */
-    public function getExpirationTime()
+    public function getExpirationTime() : int
     {
         return $this->expirationTime;
     }
 
     /**
-     * @param null $token
+     * @param null|string $token
      */
-    public function setToken($token)
+    public function setToken(? string $token) : void
     {
         $this->token = $token;
     }
 
     /**
-     * @return null
+     * @return null|string
      */
-    public function getToken()
+    public function getToken() : ? string
     {
         return $this->token;
     }

@@ -3,6 +3,7 @@
 namespace Nilnice\Phalcon\Auth;
 
 use Nilnice\Phalcon\Auth\Provider\JWTProvider;
+use Nilnice\Phalcon\Constant\Tip;
 use Nilnice\Phalcon\Exception\Exception;
 use Firebase\JWT\JWT;
 
@@ -36,7 +37,10 @@ class JWTToken implements JWTTokenInterface
         string $algorithm = self::ALGORITHM_HS256
     ) {
         if (! class_exists(JWT::class)) {
-            throw new Exception('You need to load the JWT class.');
+            throw new Exception(
+                'You need to load the JWT class',
+                Tip::AUTH_JWT_INVALID
+            );
         }
         $this->secret = $secret;
         $this->algorithm = $algorithm;
@@ -108,7 +112,7 @@ class JWTToken implements JWTTokenInterface
     /**
      * Converts and signs a PHP object or array into a JWT string.
      *
-     * @param object|array $token
+     * @param \stdClass|array $token
      *
      * @return string
      */
@@ -122,13 +126,14 @@ class JWTToken implements JWTTokenInterface
      *
      * @param string $token
      *
-     * @return object
+     * @return \stdClass
+     *
      * @throws \Firebase\JWT\BeforeValidException
      * @throws \Firebase\JWT\ExpiredException
      * @throws \Firebase\JWT\SignatureInvalidException
      * @throws \UnexpectedValueException
      */
-    public function decode(string $token)
+    public function decode(string $token) : \stdClass
     {
         return JWT::decode($token, $this->secret, [$this->algorithm]);
     }
@@ -139,6 +144,7 @@ class JWTToken implements JWTTokenInterface
      * @param string $token
      *
      * @return \Nilnice\Phalcon\Auth\Provider\JWTProvider
+     *
      * @throws \Firebase\JWT\BeforeValidException
      * @throws \Firebase\JWT\ExpiredException
      * @throws \Firebase\JWT\SignatureInvalidException

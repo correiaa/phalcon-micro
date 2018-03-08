@@ -12,28 +12,44 @@ class Message
     protected static $messages
         = [
             Tip::AUTH_ACCOUNT_TYPE_INVALID => [
-                'code'    => 400,
-                'message' => 'Authentication: Account Type Invalid.',
-            ],
-            Tip::AUTH_TOKEN_EXPIRED        => [
-                'code'    => 500,
-                'message' => 'Authentication: Token Expired.',
-            ],
-            Tip::AUTH_TOKEN_INVALID        => [
-                'code'    => 500,
-                'message' => 'Authentication: Token Invalid.',
-            ],
-            Tip::AUTH_TOKEN_FAILED         => [
-                'code'    => 500,
-                'message' => 'Authentication: Login Failed.',
+                'code'    => 401,
+                'message' => 'Account type invalid',
             ],
             Tip::AUTH_JWT_INVALID          => [
-                'code'    => 500,
-                'message' => 'Authentication: Login Failed.',
+                'code'    => 401,
+                'message' => 'JWT invalid',
+            ],
+            Tip::AUTH_LOGIN_FAILED         => [
+                'code'    => 401,
+                'message' => 'Login failed',
+            ],
+            Tip::AUTH_TOKEN_EXPIRED        => [
+                'code'    => 401,
+                'message' => 'Token expired',
+            ],
+            Tip::AUTH_TOKEN_INVALID        => [
+                'code'    => 401,
+                'message' => 'Token invalid',
+            ],
+            Tip::AUTH_TOKEN_FAILED         => [
+                'code'    => 401,
+                'message' => 'Login failed',
+            ],
+            Tip::AUTH_UNAUTHORIZED         => [
+                'code'    => 401,
+                'message' => 'Unauthorized',
+            ],
+            Tip::AUTH_USER_NOT_FOUND       => [
+                'code'    => 404,
+                'message' => 'Not found',
             ],
             Tip::ACCESS_DENIED             => [
                 'code'    => 403,
-                'message' => 'Access: Denied.',
+                'message' => 'Forbidden',
+            ],
+            Tip::CLASS_IMPLEMENT_ERROR     => [
+                'code'    => 400,
+                'message' => 'Class implementation error',
             ],
         ];
 

@@ -98,17 +98,23 @@ class Manager extends Plugin
 
         if (! $account) {
             throw new Exception(
-                'Account type invalid.',
+                'Account type invalid',
                 Tip::AUTH_ACCOUNT_TYPE_INVALID
             );
         }
 
         if (! $account instanceof AccountTypeInterface) {
-            throw new Exception('Account type must be an instance of AccountTypeInterface.');
+            throw new Exception(
+                'Account type must be an instance of AccountTypeInterface',
+                Tip::FAILED
+            );
         }
 
         if (! $identity = $account->login($array)) {
-            throw new Exception('User not exists.', Tip::AUTH_LOGIN_FAILED);
+            throw new Exception(
+                'User not exists',
+                Tip::AUTH_USER_NOT_FOUND
+            );
         }
 
         $startTime = time();
