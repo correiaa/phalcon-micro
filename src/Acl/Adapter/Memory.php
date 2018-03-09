@@ -1,8 +1,8 @@
 <?php
 
-namespace Nilnice\Phalcon\Constant;
+namespace Nilnice\Phalcon\Acl\Adapter;
 
-class Role
+class Memory extends \Phalcon\Acl\Adapter\Memory
 {
     // Unauthorized.
     public const UNAUTHORIZED = 'Unauthorized';
