@@ -22,6 +22,9 @@ class Service
     // Security service.
     public const SECURITY = 'security';
 
+    // Acl service.
+    public const ACL = 'acl';
+
     // URL service.
     public const URL = 'url';
 
