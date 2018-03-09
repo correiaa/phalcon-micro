@@ -2,8 +2,12 @@
 
 namespace Nilnice\Phalcon\Acl\Adapter;
 
+use Nilnice\Phalcon\Acl\AclMountTrait;
+
 class Memory extends \Phalcon\Acl\Adapter\Memory
 {
+    use AclMountTrait;
+
     // Unauthorized.
     public const UNAUTHORIZED = 'Unauthorized';
 
