@@ -11,16 +11,6 @@ class Collection extends \Phalcon\Mvc\Micro\Collection implements
     use CollectionTrait;
 
     /**
-     * @var array
-     */
-    protected $allowRoles = [];
-
-    /**
-     * @var array
-     */
-    protected $denyRoles = [];
-
-    /**
      * Collection constructor.
      *
      * @param string $prefix
@@ -54,59 +44,5 @@ class Collection extends \Phalcon\Mvc\Micro\Collection implements
         }
 
         return $collection;
-    }
-
-    /**
-     * Allows access to this endpoint for role with the given names.
-     *
-     * @param ...array $roles
-     *
-     * @return \Nilnice\Phalcon\Collection
-     */
-    public function setAllowRoles() : self
-    {
-        $roles = Arr::flatten(\func_get_args());
-        foreach ($roles as $role) {
-            if (! \in_array($roles, $this->allowRoles, true)) {
-                $this->allowRoles[] = $role;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllowRoles() : array
-    {
-        return $this->allowRoles;
-    }
-
-    /**
-     * Denies access to this endpoint for role with the given names.
-     *
-     * @param ...array $roles
-     *
-     * @return $this
-     */
-    public function setDenyRoles() : self
-    {
-        $roles = Arr::flatten(\func_get_args());
-        foreach ($roles as $role) {
-            if (! \in_array($roles, $this->denyRoles, true)) {
-                $this->denyRoles[] = $role;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getDenyRoles() : array
-    {
-        return $this->denyRoles;
     }
 }
