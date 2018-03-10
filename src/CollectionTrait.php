@@ -259,26 +259,31 @@ trait CollectionTrait
         $defaultAllowRoles = $this->allowRoles;
         $defaultDenyRoles = $this->denyRoles;
 
+        /** @var \Phalcon\Acl\Role $role */
         foreach ($roles as $role) {
             /** @var \Nilnice\Phalcon\Endpoint $endpoint */
             foreach ($this->endpoints as $endpoint) {
                 $rule = null;
+                $allowCollection = collect(array_merge(
+                    $defaultAllowRoles,
+                    $endpoint->getAllowRole()
+                ));
+                $denyCollection = collect(array_merge(
+                    $defaultDenyRoles,
+                    $endpoint->getDenyRole()
+                ));
 
-                if (array_has($defaultAllowRoles, $role)
-                    || array_has($endpoint->getAllowRole(), $role)
-                ) {
+                if ($allowCollection->contains($role->getName())) {
                     $rule = true;
                 }
 
-                if (array_has($defaultDenyRoles, $role)
-                    || array_has($endpoint->getDenyRole(), $role)
-                ) {
+                if ($denyCollection->contains($role->getName())) {
                     $rule = false;
                 }
 
                 if ($rule === true) {
                     $allowedRoles = [
-                        $role,
+                        $role->getName(),
                         $this->getIdentifier(),
                         $endpoint->getIdentifier(),
                     ];
@@ -286,7 +291,7 @@ trait CollectionTrait
 
                 if ($rule === false) {
                     $deniedRoles = [
-                        $role,
+                        $role->getName(),
                         $this->getIdentifier(),
                         $endpoint->getIdentifier(),
                     ];
