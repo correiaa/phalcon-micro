@@ -18,7 +18,7 @@ trait AclMountTrait
     {
         if ($this instanceof AdapterInterface) {
             $resources = $mount->getAclResources();
-            $roles = $mount->getAclRoles();
+            $roles = $mount->getAclRoles($this->getRoles());
 
             foreach ($resources as $resource) {
                 $count = \count($resource);
