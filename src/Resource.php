@@ -2,11 +2,13 @@
 
 namespace Nilnice\Phalcon;
 
+use Nilnice\Phalcon\Acl\MountableInterface;
 use Nilnice\Phalcon\Constant\Service;
 use Nilnice\Phalcon\Controller\AppController;
 use Phalcon\Di;
 
-class Resource extends \Phalcon\Mvc\Micro\Collection
+class Resource extends \Phalcon\Mvc\Micro\Collection implements
+    MountableInterface
 {
     use CollectionTrait;
 
