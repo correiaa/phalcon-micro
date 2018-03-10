@@ -2,8 +2,8 @@
 
 namespace Nilnice\Phalcon;
 
+use Illuminate\Support\Arr;
 use Nilnice\Phalcon\Http\Request;
-use Nilnice\Phalcon\Support\Arr;
 
 class Endpoint
 {

@@ -3,6 +3,8 @@
 namespace Nilnice\Phalcon;
 
 use Nilnice\Phalcon\Http\Request;
+use Phalcon\Acl;
+use Phalcon\Acl\Resource as AclResource;
 
 trait CollectionTrait
 {
@@ -158,6 +160,76 @@ trait CollectionTrait
     public function getIdentifier() : string
     {
         return $this->getPrefix();
+    }
+
+    /**
+     * Get Acl resources.
+     *
+     * @return array
+     */
+    public function getAclResources() : array
+    {
+        $endpointIdentifier = array_map(function (Endpoint $endpoint) {
+            return $endpoint->getIdentifier();
+        }, $this->endpoints);
+
+        $resource = new AclResource(
+            $this->getIdentifier(),
+            $this->getDescription()
+        );
+
+        return [$resource, $endpointIdentifier];
+    }
+
+    /**
+     * Get Acl roles.
+     *
+     * @param array $roles
+     *
+     * @return array
+     */
+    public function getAclRoles(array $roles) : array
+    {
+        $allowedRoles = $deniedRoles = [];
+        $defaultAllowRoles = $this->allowRoles;
+        $defaultDenyRoles = $this->denyRoles;
+
+        foreach ($roles as $role) {
+            /** @var \Nilnice\Phalcon\Endpoint $endpoint */
+            foreach ($this->endpoints as $endpoint) {
+                $rule = null;
+
+                if (array_has($defaultAllowRoles, $role)
+                    || array_has($endpoint->getAllowRole(), $role)
+                ) {
+                    $rule = true;
+                }
+
+                if (array_has($defaultDenyRoles, $role)
+                    || array_has($endpoint->getDenyRole(), $role)
+                ) {
+                    $rule = false;
+                }
+
+                if ($rule === true) {
+                    $allowedRoles = [
+                        $role,
+                        $this->getIdentifier(),
+                        $endpoint->getIdentifier(),
+                    ];
+                }
+
+                if ($rule === false) {
+                    $deniedRoles = [
+                        $role,
+                        $this->getIdentifier(),
+                        $endpoint->getIdentifier(),
+                    ];
+                }
+            }
+        }
+
+        return [Acl::ALLOW => $allowedRoles, Acl::DENY => $deniedRoles];
     }
 
     /**

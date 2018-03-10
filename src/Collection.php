@@ -2,9 +2,11 @@
 
 namespace Nilnice\Phalcon;
 
-use Nilnice\Phalcon\Support\Arr;
+use Illuminate\Support\Arr;
+use Nilnice\Phalcon\Acl\MountableInterface;
 
-class Collection extends \Phalcon\Mvc\Micro\Collection
+class Collection extends \Phalcon\Mvc\Micro\Collection implements
+    MountableInterface
 {
     use CollectionTrait;
 
