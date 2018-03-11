@@ -22,11 +22,11 @@ trait AclMountTrait
 
             foreach ($resources as $resource) {
                 $count = \count($resource);
-                if ($count > 0) {
+                if ($count === 0) {
                     continue;
                 }
-                $accessList = $count > 1 ? $resource[1] : null;
-                $this->addResource($resource[0], $accessList);
+                $access = $count > 1 ? $resource[1] : null;
+                $this->addResource($resource[0], $access);
             }
 
             $allowedRoles = $roles[Acl::ALLOW] ?? [];
