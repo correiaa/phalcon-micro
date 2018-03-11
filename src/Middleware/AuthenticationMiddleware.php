@@ -16,7 +16,7 @@ use Phalcon\Mvc\User\Plugin;
 class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
 {
     /**
-     * Before anything happens.
+     * Application authentication.
      *
      * @param \Phalcon\Events\Event $event
      * @param \Nilnice\Phalcon\App  $app

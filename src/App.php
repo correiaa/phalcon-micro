@@ -30,6 +30,11 @@ class App extends Micro
     protected $endpointByIdentifier = [];
 
     /**
+     * @var null|array
+     */
+    private $routeByName;
+
+    /**
      * Attach middleware.
      *
      * @param \Phalcon\Mvc\Micro\MiddlewareInterface $middleware
@@ -114,5 +119,67 @@ class App extends Micro
         }
 
         return parent::mount($collection);
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getMatchedCollection()
+    {
+        $identifier = $this->getMatchedRouteUri('collection');
+
+        if (! $identifier) {
+            return null;
+        }
+
+        return $this->collectionByIdentifier[$identifier] ?? null;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getMatchedEndpoint()
+    {
+        $collectionIdentifier = $this->getMatchedRouteUri('collection');
+        $endpointIdentifier = $this->getMatchedRouteUri('endpoint');
+
+        if (! $endpointIdentifier) {
+            return null;
+        }
+
+        $identifier = $collectionIdentifier . ' ' . $endpointIdentifier;
+
+        return $this->endpointByIdentifier[$identifier] ?? null;
+    }
+
+    /**
+     * Returns the route that matches the handled URI.
+     *
+     * @param string $name
+     *
+     * @return mixed|null
+     */
+    private function getMatchedRouteUri(string $name)
+    {
+        if ($this->routeByName === null) {
+            $routeName = $this->getRouter()->getMatchedRoute()->getName();
+
+            if (! $routeName) {
+                return null;
+            }
+
+            $this->routeByName = unserialize(
+                $routeName,
+                ['allow_classes' => false]
+            );
+        }
+
+        if (\is_array($this->routeByName)
+            && array_key_exists($name, $this->routeByName)
+        ) {
+            return $this->routeByName[$name];
+        }
+
+        return null;
     }
 }
