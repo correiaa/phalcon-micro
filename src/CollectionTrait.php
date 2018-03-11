@@ -238,12 +238,15 @@ trait CollectionTrait
             return $endpoint->getIdentifier();
         }, $this->endpoints);
 
-        $resource = new AclResource(
-            $this->getIdentifier(),
-            $this->getDescription()
-        );
+        $result = [
+            new AclResource(
+                $this->getIdentifier(),
+                $this->getDescription()
+            ),
+            $endpointIdentifier,
+        ];
 
-        return [$resource, $endpointIdentifier];
+        return [$result];
     }
 
     /**
