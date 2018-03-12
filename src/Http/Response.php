@@ -34,16 +34,20 @@ class Response extends \Phalcon\Http\Response
             }
         }
 
-        $info = [];
+        $data = $userInfo = $devInfo = [];
         $msg = $msg ?? 'Unknown exception';
         if ($e instanceof Exception && $e->getUserInfo() !== null) {
-            $info['userInfo'] = $e->getUserInfo();
+            $userInfo = $e->getUserInfo();
         }
 
         if ($devMode === true) {
             $method = $request->getMethod();
             $uri = $request->getURI();
-            $devInfo = [
+
+            if ($e instanceof Exception && $e->getDevInfo() !== null) {
+                $devInfo = $e->getDevInfo();
+            }
+            $devInfo = array_merge($devInfo, [
                 'message'       => $e->getMessage(),
                 'file'          => $e->getFile(),
                 'line'          => $e->getLine(),
@@ -51,21 +55,17 @@ class Response extends \Phalcon\Http\Response
                 'previous'      => $e->getPrevious(),
                 'trace'         => $e->getTrace(),
                 'traceAsString' => $e->getTraceAsString(),
-            ];
-
-            if ($e instanceof Exception && $e->getDevInfo() !== null) {
-                $devInfo['devInfo'] = $e->getDevInfo();
-            }
-            $info['devInfo'] = $devInfo;
+            ]);
+            $data = ['devInfo' => $devInfo, 'userInfo' => $userInfo];
         }
 
         $content = [
             'code'    => $e->getCode(),
             'message' => $msg,
-            'data'    => $info,
+            'data'    => $data,
         ];
         $this->setJsonContent($content);
-        $this->setStatusCode(500);
+        $this->setStatusCode($code);
     }
 
     /**
