@@ -38,7 +38,8 @@ trait AclMountTrait
                     continue;
                 }
                 $access = $count > 2 ? $allowedRole[2] : null;
-                $this->allow($allowedRole[0], $allowedRole[1], $access);
+                [$roleName, $resourceName] = $allowedRole;
+                $this->allow($roleName, $resourceName, $access);
             }
 
             foreach ($deniedRoles as $deniedRole) {
@@ -47,7 +48,8 @@ trait AclMountTrait
                     continue;
                 }
                 $access = $count > 2 ? $deniedRole[2] : null;
-                $this->deny($deniedRole[0], $deniedRole[1], $access);
+                [$roleName, $resourceName] = $deniedRole;
+                $this->deny($roleName, $resourceName, $access);
             }
         }
 

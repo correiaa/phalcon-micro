@@ -285,7 +285,7 @@ trait CollectionTrait
                 }
 
                 if ($rule === true) {
-                    $allowedRoles = [
+                    $allowedRoles[] = [
                         $role->getName(),
                         $this->getIdentifier(),
                         $endpoint->getIdentifier(),
@@ -293,7 +293,7 @@ trait CollectionTrait
                 }
 
                 if ($rule === false) {
-                    $deniedRoles = [
+                    $deniedRoles[] = [
                         $role->getName(),
                         $this->getIdentifier(),
                         $endpoint->getIdentifier(),
@@ -302,7 +302,7 @@ trait CollectionTrait
             }
         }
 
-        return [Acl::ALLOW => $allowedRoles, Acl::DENY => $deniedRoles];
+        return [Acl::DENY => $deniedRoles, Acl::ALLOW => $allowedRoles];
     }
 
     /**

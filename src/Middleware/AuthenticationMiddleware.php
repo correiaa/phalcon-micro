@@ -39,7 +39,7 @@ class AuthenticationMiddleware extends Plugin implements MiddlewareInterface
      *
      * @return bool
      */
-    public function call(Micro $micro)
+    public function call(Micro $micro) : bool
     {
         return true;
     }

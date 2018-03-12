@@ -35,7 +35,7 @@ class AuthorizationMiddleware extends Plugin implements MiddlewareInterface
             return;
         }
 
-        $roleName = '';
+        $roleName = 'User';
         $resourceName = $collection->getIdentifier();
         $access = $endpoint->getIdentifier();
 
