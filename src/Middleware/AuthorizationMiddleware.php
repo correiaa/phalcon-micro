@@ -42,7 +42,7 @@ class AuthorizationMiddleware extends Plugin implements MiddlewareInterface
         $isAllowed = $this->acl->isAllowed($roleName, $resourceName, $access);
 
         if (! $isAllowed) {
-            throw new Exception('Access denied', Code::ACCESS_DENIED);
+            throw new Exception(Code::ACCESS_DENIED);
         }
     }
 

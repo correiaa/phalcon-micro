@@ -17,15 +17,15 @@ class Exception extends \Exception
     /**
      * Exception constructor.
      *
-     * @param string          $message
      * @param int             $code
+     * @param string          $message
      * @param \Throwable|null $previous
      * @param array|null      $devInfo
      * @param array|null      $userInfo
      */
     public function __construct(
-        string $message = '',
         int $code = 0,
+        string $message = '',
         \Throwable $previous = null,
         array $devInfo = [],
         array $userInfo = []

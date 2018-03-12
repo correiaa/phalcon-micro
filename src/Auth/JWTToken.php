@@ -37,10 +37,7 @@ class JWTToken implements JWTTokenInterface
         string $algorithm = self::ALGORITHM_HS256
     ) {
         if (! class_exists(JWT::class)) {
-            throw new Exception(
-                'The JWT class may not be loaded correctly',
-                Code::AUTH_JWT_INVALID
-            );
+            throw new Exception(Code::AUTH_JWT_INVALID);
         }
         $this->secret = $secret;
         $this->algorithm = $algorithm;

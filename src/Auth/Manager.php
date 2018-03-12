@@ -97,17 +97,11 @@ class Manager extends Plugin
         $accountType = $this->getAccountType($type);
 
         if (! $accountType) {
-            throw new Exception(
-                'The account type may not exist',
-                Code::AUTH_ACCOUNT_TYPE_INVALID
-            );
+            throw new Exception(Code::AUTH_ACCOUNT_TYPE_INVALID);
         }
 
         if (! $accountType instanceof AccountTypeInterface) {
-            throw new Exception(
-                'The account type must be an instance of AccountTypeInterface',
-                Code::INTERFACE_IMPLEMENT_ERROR
-            );
+            throw new Exception(Code::INTERFACE_IMPLEMENT_ERROR);
         }
 
         $data = $this->getIdentity($accountType, $array);
@@ -150,7 +144,7 @@ class Manager extends Plugin
         try {
             $jwtToken = $this->jwtToken->getProvider($token);
         } catch (\Exception $e) {
-            throw new Exception($e->getMessage(), Code::AUTH_TOKEN_INVALID);
+            throw new Exception(Code::AUTH_TOKEN_INVALID, $e->getMessage());
         }
 
         if (! $jwtToken) {
@@ -158,27 +152,18 @@ class Manager extends Plugin
         }
 
         if ($jwtToken->getExpirationTime() < time()) {
-            throw new Exception(
-                'The token may be expired',
-                Code::AUTH_TOKEN_EXPIRED
-            );
+            throw new Exception(Code::AUTH_TOKEN_EXPIRED);
         }
         $jwtToken->setToken($token);
 
         /** @var \Nilnice\Phalcon\Auth\AccountTypeInterface $account */
         $account = $this->getAccountType($jwtToken->getAccountTypeName());
         if (! $account) {
-            throw new Exception(
-                'The account type may not exist',
-                Code::AUTH_ACCOUNT_TYPE_INVALID
-            );
+            throw new Exception(Code::AUTH_ACCOUNT_TYPE_INVALID);
         }
 
         if (! $account->authenticate($jwtToken->getIdentity())) {
-            throw new Exception(
-                'The user authentication may failed',
-                Code::USER_AUTH_FAILED
-            );
+            throw new Exception(Code::USER_AUTH_FAILED);
         }
         $this->jwtProvider = $jwtToken;
 

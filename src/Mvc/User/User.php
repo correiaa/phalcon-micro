@@ -50,10 +50,7 @@ class User extends Plugin
      */
     public function getRole() : string
     {
-        throw new Exception(
-            'Please implement getRole() method',
-            Code::METHOD_NOT_IMPLEMENTED
-        );
+        throw new Exception(Code::METHOD_NOT_IMPLEMENTED);
     }
 
     /**
@@ -65,9 +62,6 @@ class User extends Plugin
      */
     public function getUserByIdentity(string $identity) : array
     {
-        throw new Exception(
-            'Please implement getUserByIdentity() method',
-            Code::METHOD_NOT_IMPLEMENTED
-        );
+        throw new Exception(Code::METHOD_NOT_IMPLEMENTED);
     }
 }

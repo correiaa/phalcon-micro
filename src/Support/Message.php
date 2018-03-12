@@ -13,27 +13,27 @@ class Message
         = [
             Code::AUTH_ACCOUNT_TYPE_INVALID => [
                 'code'    => 401,
-                'message' => 'Account type invalid',
+                'message' => 'The account type may not exist',
             ],
             Code::AUTH_JWT_INVALID          => [
                 'code'    => 401,
-                'message' => 'JWT invalid',
+                'message' => 'The JWT class may not be loaded correctly',
             ],
             Code::AUTH_LOGIN_FAILED         => [
                 'code'    => 401,
-                'message' => 'Login failed',
+                'message' => 'The user login failed',
             ],
             Code::AUTH_TOKEN_EXPIRED        => [
                 'code'    => 401,
-                'message' => 'Token expired',
+                'message' => 'The token may be expired',
             ],
             Code::AUTH_TOKEN_INVALID        => [
                 'code'    => 401,
-                'message' => 'Token invalid',
+                'message' => 'The token may be invalid',
             ],
             Code::AUTH_TOKEN_FAILED         => [
                 'code'    => 401,
-                'message' => 'Login failed',
+                'message' => 'The user token invalid',
             ],
             Code::AUTH_UNAUTHORIZED         => [
                 'code'    => 401,
@@ -51,13 +51,17 @@ class Message
                 'code'    => 400,
                 'message' => 'User is locked',
             ],
+            Code::USER_AUTH_FAILED          => [
+                'code'    => 400,
+                'message' => 'The user authentication may failed',
+            ],
             Code::ACCESS_DENIED             => [
                 'code'    => 403,
                 'message' => 'Forbidden',
             ],
             Code::INTERFACE_IMPLEMENT_ERROR => [
                 'code'    => 400,
-                'message' => 'Interface implementation error',
+                'message' => 'The account type must be an instance of AccountTypeInterface',
             ],
             Code::METHOD_NOT_IMPLEMENTED    => [
                 'code'    => 400,
