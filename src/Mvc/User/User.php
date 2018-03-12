@@ -32,8 +32,7 @@ class User extends Plugin
     /**
      * @return null|string
      */
-    public
-    function getIdentity() : ? string
+    public function getIdentity() : ? string
     {
         $jwtProvider = $this->authManager->getJWTProvider();
 
@@ -49,8 +48,7 @@ class User extends Plugin
      *
      * @throws \Nilnice\Phalcon\Exception\Exception
      */
-    public
-    function getRole() : string
+    public function getRole() : string
     {
         throw new Exception(
             'Please implement getRole() method',
@@ -65,10 +63,8 @@ class User extends Plugin
      *
      * @throws \Nilnice\Phalcon\Exception\Exception
      */
-    public
-    function getUserByIdentity(
-        string $identity
-    ) : array {
+    public function getUserByIdentity(string $identity) : array
+    {
         throw new Exception(
             'Please implement getUserByIdentity() method',
             Code::METHOD_NOT_IMPLEMENTED
