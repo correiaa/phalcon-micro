@@ -42,4 +42,7 @@ class Code
 
     // Interface implementation error.
     public const INTERFACE_IMPLEMENT_ERROR = 200113;
+
+    // Method not implemented.
+    public const METHOD_NOT_IMPLEMENTED = 200114;
 }

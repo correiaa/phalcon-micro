@@ -43,6 +43,9 @@ class Service
     // Database service.
     public const DB = 'db';
 
+    // User service.
+    public const USER = 'user';
+
     // Model manager.
     public const MODELS_MANAGER = 'modelsManager';
 

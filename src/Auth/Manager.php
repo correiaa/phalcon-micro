@@ -30,7 +30,7 @@ class Manager extends Plugin
     /**
      * @var array Account types.
      */
-    private $accountType;
+    private $accountTypes;
 
     /**
      * Manager constructor.
@@ -40,7 +40,7 @@ class Manager extends Plugin
     public function __construct(int $duration = 86400)
     {
         $this->duration = $duration;
-        $this->accountType = [];
+        $this->accountTypes = [];
     }
 
     /**
@@ -55,7 +55,7 @@ class Manager extends Plugin
         string $name,
         AccountTypeInterface $accountType
     ) : self {
-        $this->accountType[$name] = $accountType;
+        $this->accountTypes[$name] = $accountType;
 
         return $this;
     }
@@ -186,6 +186,38 @@ class Manager extends Plugin
     }
 
     /**
+     * @param int $duration
+     */
+    public function setDuration(int $duration) : void
+    {
+        $this->duration = $duration;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDuration() : int
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param \Nilnice\Phalcon\Auth\Provider\JWTProvider $jwtProvider
+     */
+    public function setJWTProvider(JWTProvider $jwtProvider) : void
+    {
+        $this->jwtProvider = $jwtProvider;
+    }
+
+    /**
+     * @return \Nilnice\Phalcon\Auth\Provider\JWTProvider
+     */
+    public function getJWTProvider() : JWTProvider
+    {
+        return $this->jwtProvider;
+    }
+
+    /**
      * Get account type.
      *
      * @param string $type
@@ -194,11 +226,21 @@ class Manager extends Plugin
      */
     public function getAccountType(string $type)
     {
-        if (array_key_exists($type, $this->accountType)) {
-            return $this->accountType[$type];
+        if (array_key_exists($type, $this->accountTypes)) {
+            return $this->accountTypes[$type];
         }
 
         return null;
+    }
+
+    /**
+     * Get all account types.
+     *
+     * @return array
+     */
+    public function getAccountTypes() : array
+    {
+        return $this->accountTypes;
     }
 
     /**

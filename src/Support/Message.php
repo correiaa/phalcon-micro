@@ -59,6 +59,10 @@ class Message
                 'code'    => 400,
                 'message' => 'Interface implementation error',
             ],
+            Code::METHOD_NOT_IMPLEMENTED    => [
+                'code'    => 400,
+                'message' => 'Make a subclass of \Nilnice\Phalcon\Mvc\User with an implementation for this method',
+            ],
         ];
 
     /**
