@@ -168,4 +168,19 @@ class Resource extends \Phalcon\Mvc\Micro\Collection implements
 
         return $this->modelPrimaryKey;
     }
+
+    /**
+     * Set handler.
+     *
+     * @param mixed $handler
+     * @param bool  $lazy
+     *
+     * @return \Nilnice\Phalcon\Resource
+     */
+    public function setHandler($handler, $lazy = false) : self
+    {
+        parent::setHandler($handler, $lazy);
+
+        return $this;
+    }
 }
