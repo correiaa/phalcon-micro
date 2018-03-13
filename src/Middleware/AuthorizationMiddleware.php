@@ -11,7 +11,8 @@ use Phalcon\Mvc\Micro\MiddlewareInterface;
 use Phalcon\Mvc\User\Plugin;
 
 /**
- * @property \Phalcon\Acl\Adapter\Memory $acl
+ * @property \Nilnice\Phalcon\Mvc\User\User $user
+ * @property \Phalcon\Acl\Adapter\Memory    $acl
  */
 class AuthorizationMiddleware extends Plugin implements MiddlewareInterface
 {
@@ -35,7 +36,7 @@ class AuthorizationMiddleware extends Plugin implements MiddlewareInterface
             return;
         }
 
-        $roleName = 'User';
+        $roleName = $this->user->getRole();
         $resourceName = $collection->getIdentifier();
         $access = $endpoint->getIdentifier();
 
