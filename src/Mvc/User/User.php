@@ -4,6 +4,7 @@ namespace Nilnice\Phalcon\Mvc\User;
 
 use Nilnice\Phalcon\Constant\Code;
 use Nilnice\Phalcon\Exception\Exception;
+use Phalcon\Mvc\Model;
 use Phalcon\Mvc\User\Plugin;
 
 /**
@@ -23,7 +24,9 @@ class User extends Plugin
         $user = [];
 
         if ($identity = $this->getIdentity()) {
-            $user = $this->getUserByIdentity($identity);
+            $object = $this->getUserByIdentity($identity);
+
+            return $object ? $object->toArray() : $user;
         }
 
         return $user;
@@ -44,6 +47,8 @@ class User extends Plugin
     }
 
     /**
+     * Get user role.
+     *
      * @return string
      *
      * @throws \Nilnice\Phalcon\Exception\Exception
@@ -54,13 +59,15 @@ class User extends Plugin
     }
 
     /**
+     * Get user by identity.
+     *
      * @param string $identity
      *
-     * @return array
+     * @return \Phalcon\Mvc\Model
      *
      * @throws \Nilnice\Phalcon\Exception\Exception
      */
-    public function getUserByIdentity(string $identity) : array
+    public function getUserByIdentity(string $identity) : Model
     {
         throw new Exception(Code::METHOD_NOT_IMPLEMENTED);
     }
