@@ -32,6 +32,8 @@ class Response extends \Phalcon\Http\Response
             if (! $message) {
                 $msg = $default['message'];
             }
+        } else {
+            $code = 400;
         }
 
         $data = $userInfo = $devInfo = [];
