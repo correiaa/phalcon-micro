@@ -113,7 +113,7 @@ class Manager extends Plugin
             = $data;
 
         if ($code && $message) {
-            throw new Exception($message, $code);
+            throw new Exception($code, $message);
         }
 
         $startTime = time();
