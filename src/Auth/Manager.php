@@ -195,9 +195,9 @@ class Manager extends Plugin
     }
 
     /**
-     * @return \Nilnice\Phalcon\Auth\Provider\JWTProvider
+     * @return \Nilnice\Phalcon\Auth\Provider\JWTProvider|null
      */
-    public function getJWTProvider() : JWTProvider
+    public function getJWTProvider() : ? JWTProvider
     {
         return $this->jwtProvider;
     }
