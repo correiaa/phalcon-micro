@@ -14,7 +14,10 @@
   "autoload": {
     "psr-4": {
       "Nilnice\\Phalcon\\": "src/"
-    }
+    },
+    "files": [
+      "src/Support/helpers.php"
+    ]
   },
   "minimum-stability": "dev",
   "license": "MIT",
