@@ -1,8 +1,59 @@
 <?php
-/**
- * Created by PhpStorm.
- *
- * User: majinyun
- * Date: 19/03/2018
- * Time: 14:20
- */
+
+use Illuminate\Support\Str;
+use Phalcon\Di;
+
+if (! function_exists('env')) {
+    /**
+     * Gets the value of an environment variable. Supports boolean, empty and null.
+     *
+     * @param  string $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
+    function env($key, $default = null)
+    {
+        $value = getenv($key);
+        if ($value === false) {
+            return value($default);
+        }
+        switch (strtolower($value)) {
+            case 'true':
+            case '(true)':
+                return true;
+            case 'false':
+            case '(false)':
+                return false;
+            case 'empty':
+            case '(empty)':
+                return '';
+            case 'null':
+            case '(null)':
+                return;
+        }
+        if (Str::startsWith($value, '"') && Str::endsWith($value, '"')) {
+            return substr($value, 1, -1);
+        }
+
+        return $value;
+    }
+}
+
+if (! function_exists('app')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param null $make
+     *
+     * @return \Phalcon\DiInterface
+     */
+    function app($make = null)
+    {
+        if ($make === null) {
+            return Di::getDefault();
+        }
+
+        return Di::setDefault($make);
+    }
+}

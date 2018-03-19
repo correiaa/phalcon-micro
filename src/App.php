@@ -3,6 +3,7 @@
 namespace Nilnice\Phalcon;
 
 use Nilnice\Phalcon\Constant\Service;
+use Phalcon\DiInterface;
 use Phalcon\Mvc\Micro;
 use Phalcon\Mvc\Micro\Collection;
 use Phalcon\Mvc\Micro\CollectionInterface;
@@ -14,6 +15,13 @@ use Phalcon\Mvc\Micro\MiddlewareInterface;
  */
 class App extends Micro
 {
+    /**
+     * The base path of the application installation.
+     *
+     * @var string
+     */
+    protected $basePath;
+
     /**
      * @var array
      */
@@ -33,6 +41,93 @@ class App extends Micro
      * @var null|array
      */
     private $routeByName;
+
+    public function __construct(
+        DiInterface $dependencyInjector = null,
+        string $basePath = null
+    ) {
+        parent::__construct($dependencyInjector);
+
+        if (! empty(getenv('APP_TIMEZONE'))) {
+            date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
+        }
+
+        $this->basePath = $basePath;
+    }
+
+    /**
+     * Get the path to the application "app" directory.
+     *
+     * @return string
+     */
+    public function path() : string
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . 'app';
+    }
+
+    /**
+     * Get the path to the given configuration file.
+     *
+     * If no name is provided, then we'll return the path to the config folder.
+     *
+     * @param  string|null $name
+     *
+     * @return string
+     */
+    public function getConfigurationPath(string $name = null) : string
+    {
+        if (! $name) {
+            if (file_exists($path = $this->basePath('config') . '/')) {
+                return $path;
+            }
+
+            if (file_exists($path = __DIR__ . '/../config/')) {
+                return $path;
+            }
+        }
+
+        if (file_exists(
+            $path = $this->basePath('config' . '/' . $name . '.php'))
+        ) {
+            return $path;
+        }
+
+        if (file_exists($path = __DIR__ . '/../config/' . $name . '.php')) {
+            return $path;
+        }
+    }
+
+    /**
+     * Get the base path for the application.
+     *
+     * @param string|null $path
+     *
+     * @return string
+     */
+    public function basePath($path = null) : string
+    {
+        if ($this->basePath !== null) {
+            return $this->basePath . ($path ? '/' . $path : $path);
+        }
+
+        if ($this->isRunningInConsole()) {
+            $this->basePath = getcwd();
+        } else {
+            $this->basePath = \dirname(getcwd() . '/../');
+        }
+
+        return $this->basePath($path);
+    }
+
+    /**
+     * Determine if the application is running in the console.
+     *
+     * @return bool
+     */
+    public function isRunningInConsole() : bool
+    {
+        return PHP_SAPI === 'cli';
+    }
 
     /**
      * Attach middleware.
