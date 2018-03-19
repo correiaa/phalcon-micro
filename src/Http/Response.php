@@ -29,7 +29,7 @@ class Response extends \Phalcon\Http\Response
             $default = $message->get($code);
             $code = $default['code'];
 
-            if (! $message) {
+            if (! $msg) {
                 $msg = $default['message'];
             }
         } else {
@@ -37,7 +37,7 @@ class Response extends \Phalcon\Http\Response
         }
 
         $data = $userInfo = $devInfo = [];
-        $msg = $msg ?? 'Unknown exception';
+        $msg = $msg ?? 'An unknown exception or error';
         if ($e instanceof Exception && $e->getUserInfo() !== null) {
             $userInfo = $e->getUserInfo();
         }
