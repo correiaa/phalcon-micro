@@ -72,21 +72,21 @@ class Message
     /**
      * Get message by code.
      *
-     * @param int $code
+     * @param string|int $code
      *
      * @return array|null
      */
-    public function get(int $code) : ?array
+    public function get($code) : ?array
     {
         return $this->has($code) ? self::$messages[$code] : null;
     }
 
     /**
-     * @param int $code
+     * @param string|int $code
      *
      * @return bool
      */
-    public function has(int $code) : bool
+    public function has($code) : bool
     {
         return array_key_exists($code, self::$messages);
     }
@@ -94,13 +94,13 @@ class Message
     /**
      * Get message by tip code.
      *
-     * @param int    $tip
-     * @param string $message
-     * @param int    $code
+     * @param string|int $tip
+     * @param string     $message
+     * @param int        $code
      *
      * @return array
      */
-    public function getMessage(int $tip, string $message, int $code) : array
+    public function getMessage($tip, string $message, int $code) : array
     {
         return self::$messages[$tip] = [
             'code'    => $code,
