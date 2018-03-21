@@ -19,14 +19,19 @@ class User extends Plugin
      *
      * @throws \Nilnice\Phalcon\Exception\Exception
      */
-    public function getUser() : array
+    /**
+     * @return \Phalcon\Mvc\Model|null
+     *
+     * @throws \Nilnice\Phalcon\Exception\Exception
+     */
+    public function getUser() : ? Model
     {
-        $user = [];
+        $user = null;
 
         if ($identity = $this->getIdentity()) {
-            $object = $this->getUserByIdentity($identity);
+            $user = $this->getUserByIdentity($identity);
 
-            return $object ? $object->toArray() : $user;
+            return $user;
         }
 
         return $user;

@@ -41,15 +41,15 @@ class Message
             ],
             Code::USER_NOT_EXIST            => [
                 'code'    => 400,
-                'message' => 'User does not exist',
+                'message' => 'The user does not exist',
             ],
             Code::USER_PASS_ERROR           => [
                 'code'    => 400,
-                'message' => 'User password error',
+                'message' => 'The user password error',
             ],
             Code::USER_LOCKED               => [
                 'code'    => 400,
-                'message' => 'User is locked',
+                'message' => 'The user is locked',
             ],
             Code::USER_AUTH_FAILED          => [
                 'code'    => 400,
@@ -66,6 +66,10 @@ class Message
             Code::METHOD_NOT_IMPLEMENTED    => [
                 'code'    => 400,
                 'message' => 'Make a subclass of \Nilnice\Phalcon\Mvc\User with an implementation for this method',
+            ],
+            Code::ROLE_NOT_EXIST            => [
+                'code'    => 400,
+                'message' => 'The user role does not exist',
             ],
         ];
 

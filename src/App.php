@@ -42,6 +42,12 @@ class App extends Micro
      */
     private $routeByName;
 
+    /**
+     * App constructor.
+     *
+     * @param \Phalcon\DiInterface|null $dependencyInjector
+     * @param string|null               $basePath
+     */
     public function __construct(
         DiInterface $dependencyInjector = null,
         string $basePath = null

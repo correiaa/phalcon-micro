@@ -45,4 +45,7 @@ class Code
 
     // Method not implemented.
     public const METHOD_NOT_IMPLEMENTED = 200114;
+
+    // Role does not exist.
+    public const ROLE_NOT_EXIST = 200115;
 }
